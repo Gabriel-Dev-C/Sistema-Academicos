@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SistemaAcademicos.Views.EditarPeriodos"
+             Title="Editar Período">
+
+    <ScrollView>
+        
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            
+            <Label x:Name="lblCodigo" Text="Código: "/>
+            <Entry x:Name="txtCodigo"/>
+            
+            <Label x:Name="lblNome" Text="Nome: "/>
+            <Entry x:Name="txtNome"/>
+            
+            <Button x:Name="btnInserir" Text="Inserir" Clicked="btnInserir_Clicked"/>
+            <Button x:Name="btnLimpar" Text="Limpar" Clicked="btnLimpar_Clicked"/>
+            <Button x:Name="btnAlterar" Text="Alterar" Clicked="btnAlterar_Clicked"/>
+            
+            <SearchBar x:Name="txtsearch"
+                Placeholder="Digite o nome."
+                TextChanged="txtsearch_TextChanged"/>
+            
+            <ListView x:Name="lstperiodos" ItemSelected="lstperiodos_ItemSelected">
+                
+                <ListView.Header>
+                    <Grid ColumnDefinitions="*, *">
+                        <Label Grid.Column="0" Text="CÓDIGO"/>
+                        <Label Grid.Column="1" Text="NOME"/>
+                    </Grid>
+                </ListView.Header>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Remover" Clicked="MenuItem_Clicked"/>
+                            </ViewCell.ContextActions>
+                            <Grid ColumnDefinitions="*, *">
+                                <Label Grid.Column="0" Text="{Binding Codigo}"/>
+                                <Label Grid.Column="1" Text="{Binding Nome}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
+            
+        </VerticalStackLayout>
+        
+    </ScrollView>
+
+</ContentPage>

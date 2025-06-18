@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SistemaAcademicos.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+        Padding="30,0"
+        Spacing="25">
+            
+            <Image
+            Source="logo_main.png"
+            HeightRequest="185"
+            Aspect="AspectFit"
+            SemanticProperties.Description="Logo do Anchieta." />
+
+            <Label
+            Text="PÁGINA PRINCIPAL."
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+            Text="Não possui cadastro? Clique aqui para se registrar."
+            HorizontalTextAlignment="Center"
+            Margin="0,220,0,0"/>
+
+            <Button
+            Text="Cadastrar"
+            BackgroundColor="LightGray"
+            TextColor="Black"
+            Clicked="CadastrarUser"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

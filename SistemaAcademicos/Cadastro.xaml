@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SistemaAcademicos.Cadastro"
+             Title="Cadastro de usuários">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="20">
+
+            <Label
+        x:Name="lblNomeC"
+        Text="Nome Completo"/>
+
+            <Entry
+        x:Name="etrNomeC"
+        Placeholder="Digite aqui seu nome completo."
+        BackgroundColor="White"
+        TextColor="Black"/>
+
+            <Label
+        x:Name="lblNasc"
+        Text="Data de nascimento"/>
+
+            <DatePicker
+         x:Name="dpNasc"
+         Format="dd/MM/yyyy"
+         BackgroundColor="White"
+         TextColor="Black"/>
+
+            <Label
+        x:Name="lblEmail"
+        Text="Email"/>
+
+            <Entry
+        x:Name="etrEmail"
+        Placeholder="Digite aqui seu email acadêmico."
+        BackgroundColor="White"
+        TextColor="Black"/>
+
+            <Label
+        x:Name="lblCpf"
+        Text="CPF"/>
+
+            <Entry
+        x:Name="etrCpf"
+        Placeholder="Digite aqui seu CPf."
+        BackgroundColor="White"
+        TextColor="Black"
+        Keyboard="Telephone"
+        MaxLength="11"/>
+
+            <Label
+        x:Name="lblTel"
+        Text="Número de Telefone"/>
+
+            <Entry
+        x:Name="etrTel"
+        Placeholder="(XX) XXXXX-XXXX"
+        BackgroundColor="White"
+        TextColor="Black"
+        Keyboard="Telephone"
+        MaxLength="11"/>
+
+            <Button
+        x:Name="btnCadastrar"
+        Text="Cadastrar"
+        FontSize="Medium"
+        BackgroundColor="LightGray"/>
+
+            <Button
+        x:Name="btnVoltar"
+        Text="Voltar"
+        Clicked="Voltar"
+        FontSize="Medium"
+        BackgroundColor="LightGray"/>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
