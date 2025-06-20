@@ -98,4 +98,19 @@ public partial class TelaPeriodos : ContentPage
             await DisplayAlert("Erro", ex.Message, "OK");
         }
     }
+
+    private async void MenuItemEditar_Clicked(object sender, EventArgs e)
+    {
+        var menuItem = sender as MenuItem;
+        var periodo = menuItem?.BindingContext as Periodo;
+
+        if (periodo == null)
+            return;
+
+        // Navega para a tela de edição, passando o período selecionado
+        await Navigation.PushAsync(new EditarPeriodos
+        {
+            BindingContext = periodo
+        });
+    }
 }

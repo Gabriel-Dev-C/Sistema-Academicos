@@ -76,12 +76,6 @@
 	  <MauiXaml Update="Views\CriarPeriodos.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\EditandoDisciplinas.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\EditandoPeriodos.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\EditarDisciplinas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

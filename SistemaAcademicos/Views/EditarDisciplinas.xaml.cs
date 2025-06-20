@@ -94,21 +94,6 @@ public partial class EditarDisciplinas : ContentPage
 
     private void btnAlterar_Clicked(object sender, EventArgs e)
     {
-        try
-        {
-            Disciplina p = new Disciplina();
-            p.Id = int.Parse(txtCodigo.Text);
-            p.Nome = txtNome.Text;
-
-            App.Db2.Update(p);
-            Navigation.PushAsync(new Views.EditandoDisciplinas
-            {
-                BindingContext = p
-            });
-        }
-        catch (Exception ex)
-        {
-            DisplayAlert("Erro.", ex.Message, "OK");
-        }
+        
     }
 }

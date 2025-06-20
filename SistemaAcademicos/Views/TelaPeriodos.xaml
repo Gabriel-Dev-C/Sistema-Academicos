@@ -31,9 +31,15 @@
                         <ViewCell>
                             
                             <ViewCell.ContextActions>
+                                
                                 <MenuItem Text="Remover"
-                                    Clicked="MenuItem_Clicked"/>
-                            </ViewCell.ContextActions>
+                                          Clicked="MenuItem_Clicked"/>
+
+                                <MenuItem Text="Editar"    
+                                          Clicked="MenuItemEditar_Clicked"
+                                          IsDestructive="False"/>
+                                
+                        </ViewCell.ContextActions>
 
                         <Grid ColumnDefinitions="*, *, *, *">
                             <Label Grid.Column="0" Text="{Binding Id}" VerticalOptions="Center" HorizontalOptions="Start"/>
