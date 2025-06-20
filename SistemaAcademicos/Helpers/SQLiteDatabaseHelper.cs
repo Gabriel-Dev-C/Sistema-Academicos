@@ -31,9 +31,9 @@ namespace SistemaAcademicos.Helpers
 
         public Task<List<Periodo>> Search(string p)
         {
-            string sql = "SELECT * FROM Periodo WHERE Nome LIKE '%\" + q + \"%'";
+            string sql = "SELECT * FROM Periodo WHERE Nome LIKE ?";
 
-            return _conn.QueryAsync<Periodo>(sql);
+            return _conn.QueryAsync<Periodo>(sql, $"%{p}%");
         }
 
         public Task<int> Delete(int p)

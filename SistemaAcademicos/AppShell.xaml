@@ -40,13 +40,13 @@
         <ShellContent
             Title="Disciplinas"
             ContentTemplate="{DataTemplate views:TelaDisciplinas}"
-            Route="telaperiodos"
+            Route="teladisciplinas"
             Icon="disciplina.png"/>
 
         <ShellContent
             Title="Cursos"
             ContentTemplate="{DataTemplate views:TelaCursos}"
-            Route="telaperiodos"
+            Route="telacursos"
             Icon="curso.png"/>
 
         <ShellContent
@@ -68,37 +68,37 @@
         <ShellContent
             Title="Home"
             ContentTemplate="{DataTemplate local:MainPage}"
-            Route="FlyMainPage"
+            Route="TabMainPage"
             Icon="home.png"/>
 
         <ShellContent
             Title="Períodos"
             ContentTemplate="{DataTemplate views:TelaPeriodos}"
-            Route="telaperiodos"
+            Route="TabPeriodos"
             Icon="periodo.png"/>
 
         <ShellContent
             Title="Disciplinas"
             ContentTemplate="{DataTemplate views:TelaDisciplinas}"
-            Route="telaperiodos"
+            Route="TabDisciplinas"
             Icon="disciplina.png"/>
 
         <ShellContent
             Title="Cursos"
             ContentTemplate="{DataTemplate views:TelaCursos}"
-            Route="telaperiodos"
+            Route="TabCursos"
             Icon="curso.png"/>
 
         <ShellContent
             Title="Sobre"
             ContentTemplate="{DataTemplate local:Sobre}"
-            Route="Flysobre"
+            Route="TabSobre"
             Icon="inter.png"/>
 
         <ShellContent
             Title="Cadastro"
             ContentTemplate="{DataTemplate local:Cadastro}"
-            Route="Flycadastro"
+            Route="TabCadastro"
             Icon="cadastro.png"/>
 
     </TabBar>
