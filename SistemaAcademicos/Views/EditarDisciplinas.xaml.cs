@@ -1,99 +1,56 @@
 using System.Collections.ObjectModel;
 using SistemaAcademicos.Models;
-using SistemaAcademicos.Views;
 
-namespace SistemaAcademicos.Views;
-
-public partial class EditarDisciplinas : ContentPage
+namespace SistemaAcademicos.Views
 {
-    ObservableCollection<Disciplina> lista = new ObservableCollection<Disciplina>();
-    public EditarDisciplinas()
+    public partial class EditarDisciplinas : ContentPage
     {
-        InitializeComponent();
-
-        lstdisciplinas.ItemsSource = lista;
-    }
-
-    protected override void OnAppearing()
-    {
-        carregarLista();
-    }
-
-    private async void carregarLista()
-    {
-        List<Disciplina> tmp = await App.Db2.GetAll();
-        lista.Clear();
-        foreach (Disciplina disciplina in tmp)
+        public EditarDisciplinas()
         {
-            lista.Add(disciplina);
-        }
-    }
+            InitializeComponent();
 
-    private async void btnInserir_Clicked(object sender, EventArgs e)
-    {
-        Disciplina per = new Disciplina();
-        per.Nome = txtNome.Text;
-
-        await App.Db2.Insert(per);
-        await DisplayAlert("Sucesso!", "Registro inserido", "OK");
-
-        carregarLista();
-    }
-
-    private async void txtsearch_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        string q = e.NewTextValue;
-        lista.Clear();
-        List<Disciplina> tmp = await App.Db2.Search(q);
-        foreach (Disciplina disciplina in tmp)
-        {
-            lista.Add(disciplina);
-        }
-    }
-
-    private async void MenuItem_Clicked(object sender, EventArgs e)
-    {
-        try
-        {
-            MenuItem selecionado = sender as MenuItem;
-            Disciplina p = selecionado.BindingContext as Disciplina;
-
-            bool confirmacao = await DisplayAlert(
-            "Confirmação", "Confirma a remoção?", "Sim", "Não");
-            if (confirmacao == true)
+            // Preenche as Entry se vier uma Disciplina via BindingContext
+            if (BindingContext is Disciplina disciplina)
             {
-                await App.Db2.Delete(p.Id);
-                lista.Remove(p);
+                txtCodigo.Text = disciplina.Id.ToString();
+                txtNome.Text = disciplina.Nome;
+                txtSigla.Text = disciplina.Sigla;
+                txtObservacoes.Text = disciplina.Observacao;
             }
         }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Erro", ex.Message, "OK");
-        }
-    }
 
-    private void lstdisciplinas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        try
+        private void btnLimpar_Clicked(object sender, EventArgs e)
         {
-            Disciplina p = e.SelectedItem as Disciplina;
-            txtCodigo.Text = p.Id.ToString();
-            txtNome.Text = p.Nome.ToString();
+            txtNome.Text = string.Empty;
+            txtSigla.Text = string.Empty;
+            txtObservacoes.Text = string.Empty;
         }
-        catch (Exception ex)
+
+        private async void btnAlterar_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("Erro.", ex.Message, "OK");
+            if (BindingContext is not Disciplina disciplina)
+                return;
+
+            if (string.IsNullOrWhiteSpace(disciplina.Nome) || string.IsNullOrWhiteSpace(disciplina.Sigla))
+            {
+                await DisplayAlert("Atenção", "Preencha todos os campos.", "OK");
+                return;
+            }
+
+            bool confirm = await DisplayAlert("Confirmação", "Deseja realmente editar este registro?", "Sim", "Não");
+            if (!confirm)
+                return;
+
+            try
+            {
+                await App.Db.UpdateDisciplina(disciplina);
+                await DisplayAlert("Sucesso!", "Registro editado com sucesso.", "OK");
+                await Navigation.PopAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
-    }
-
-    private void btnLimpar_Clicked(object sender, EventArgs e)
-    {
-        txtCodigo.Text = String.Empty;
-        txtNome.Text = String.Empty;
-    }
-
-    private void btnAlterar_Clicked(object sender, EventArgs e)
-    {
-        
     }
 }

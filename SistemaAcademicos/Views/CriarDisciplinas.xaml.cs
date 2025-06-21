@@ -16,14 +16,17 @@ public partial class CriarDisciplinas : ContentPage
             Disciplina p = new Disciplina
             {
                 Nome = txt_nome.Text,
-                Sigla = txt_sigla.Text
+                Sigla = txt_sigla.Text,
+                Observacao = txt_observacoes.Text
             };
-            await App.Db2.Insert(p);
+            await App.Db.InsertDisciplina(p);
             await DisplayAlert("Sucesso!", "Registro inserido", "OK");
+
+            await Navigation.PopAsync();
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Erro", ex.Message, "OK");
+            await DisplayAlert("Ops...", ex.Message, "OK");
         }
     }
 }

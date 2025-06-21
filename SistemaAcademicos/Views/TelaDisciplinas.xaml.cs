@@ -11,12 +11,15 @@ public partial class TelaDisciplinas : ContentPage
     {
         InitializeComponent();
 
-        lstdisciplina.ItemsSource = lista;
+        lstdisciplinas.ItemsSource = lista;
     }
 
     protected async override void OnAppearing()
     {
-        List<Disciplina> tmp = await App.Db2.GetAll();
+        base.OnAppearing(); // Call the base method to ensure proper page lifecycle handling
+        lista.Clear(); // Clear the existing list to avoid duplicates
+
+        List<Disciplina> tmp = await App.Db.GetAllDisciplinas();
 
         foreach (Disciplina disciplina in tmp)
         {
@@ -27,7 +30,7 @@ public partial class TelaDisciplinas : ContentPage
     {
         try
         {
-            Navigation.PushAsync(new Views.CriarDisciplinas());
+            Navigation.PushAsync(new CriarDisciplinas());
         }
         catch (Exception ex)
         {
@@ -35,18 +38,79 @@ public partial class TelaDisciplinas : ContentPage
         }
     }
 
+    private bool _isSearching = false;
     private async void txtsearch_TextChanged(object sender, TextChangedEventArgs e)
     {
-        string q = e.NewTextValue;
-        lista.Clear();
-        List<Disciplina> tmp = await App.Db2.Search(q);
-        foreach (Disciplina disciplina in tmp)
+        if (_isSearching) return; // Evita concorrência
+        _isSearching = true;
+
+        try
         {
-            lista.Add(disciplina);
+            string q = e.NewTextValue?.Trim() ?? "";
+            lista.Clear();
+
+            if (string.IsNullOrWhiteSpace(q))
+            {
+                // Se o campo está vazio, recarrega todos os itens
+                List<Disciplina> tmp = await App.Db.GetAllDisciplinas();
+                foreach (Disciplina disciplina in tmp)
+                    lista.Add(disciplina);
+            }
+            else
+            {
+                // Busca filtrada
+                List<Disciplina> tmp = await App.Db.SearchDisciplina(q);
+                foreach (Disciplina disciplina in tmp)
+                    lista.Add(disciplina);
+            }
+        }
+        finally
+        {
+            _isSearching = false;
         }
     }
 
-    private void MenuItem_Clicked(object sender, EventArgs e)
+    private async void MenuItem_Clicked(object sender, EventArgs e)
     {
+        try
+        {
+            // Recupera o MenuItem e o Periodo associado
+            var menuItem = sender as MenuItem;
+            var disciplina = menuItem?.BindingContext as Disciplina;
+
+            if (disciplina == null)
+                return;
+
+            // Confirmação do usuário
+            bool confirm = await DisplayAlert("Confirmação", $"Remover a disciplina '{disciplina.Nome}'?", "Sim", "Não");
+            if (!confirm)
+                return;
+
+            // Remove do banco de dados
+            await App.Db.DeleteDisciplina(disciplina.Id);
+
+            // Remove da lista (atualiza a tela automaticamente)
+            lista.Remove(disciplina);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", ex.Message, "OK");
+        }
     }
+
+    private async void MenuItemEditar_Clicked(object sender, EventArgs e)
+    {
+        var menuItem = sender as MenuItem;
+        var disciplina = menuItem?.BindingContext as Disciplina;
+
+        if (disciplina == null)
+            return;
+
+        // Navega para a tela de edição, passando o período selecionado
+        await Navigation.PushAsync(new EditarDisciplinas()
+        {
+            BindingContext = disciplina
+        });
+    }
+
 }

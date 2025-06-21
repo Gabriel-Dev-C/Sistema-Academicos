@@ -9,6 +9,6 @@ public partial class Cadastro : ContentPage
 
     private async void Voltar(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new MainPage());
+        await Navigation.PopAsync();
     }
 }

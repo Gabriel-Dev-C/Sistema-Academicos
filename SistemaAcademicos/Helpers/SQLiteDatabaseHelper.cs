@@ -10,6 +10,7 @@ namespace SistemaAcademicos.Helpers
         {
             _conn = new SQLiteAsyncConnection(path);
             _conn.CreateTableAsync<Periodo>().Wait();
+            _conn.CreateTableAsync<Disciplina>().Wait();
         }
 
         public Task<int> Insert(Periodo p)
@@ -39,6 +40,34 @@ namespace SistemaAcademicos.Helpers
         public Task<int> Delete(int p)
         {
             return _conn.Table<Periodo>().DeleteAsync(i => i.Id == p);
+        }
+
+        // Métodos para Disciplina
+        public Task<int> InsertDisciplina(Disciplina d)
+        {
+            return _conn.InsertAsync(d);
+        }
+
+        public Task<List<Disciplina>> UpdateDisciplina(Disciplina d)
+        {
+            string sql = "UPDATE Disciplina SET Nome=?, Sigla=?, Observacao=? WHERE Id=?";
+            return _conn.QueryAsync<Disciplina>(sql, d.Nome, d.Sigla, d.Observacao, d.Id);
+        }
+
+        public Task<List<Disciplina>> GetAllDisciplinas()
+        {
+            return _conn.Table<Disciplina>().ToListAsync();
+        }
+
+        public Task<List<Disciplina>> SearchDisciplina(string nome)
+        {
+            string sql = "SELECT * FROM Disciplina WHERE Nome LIKE ?";
+            return _conn.QueryAsync<Disciplina>(sql, $"%{nome}%");
+        }
+
+        public Task<int> DeleteDisciplina(int id)
+        {
+            return _conn.Table<Disciplina>().DeleteAsync(i => i.Id == id);
         }
     }
 }

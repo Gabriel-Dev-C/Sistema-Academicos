@@ -8,42 +8,53 @@
         <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
 
-    <VerticalStackLayout
-    Padding="30,0"
-    Spacing="25">
+    <Grid Padding="30,0" RowDefinitions="Auto,*">
 
         <SearchBar x:Name="txtsearch"
-        Placeholder="Busca de Disciplina"
-        TextChanged="txtsearch_TextChanged"/>
+        Placeholder="Busca de Disciplina por Nome"
+        TextChanged="txtsearch_TextChanged"
+        Grid.Row="0"
+        Margin="0, 0, 0, 20"/>
 
-        <ListView x:Name="lstdisciplina">
+        <ListView x:Name="lstdisciplinas"
+                  Grid.Row="1">
             <ListView.Header>
-                <Grid ColumnDefinitions="*, *, *, *">
+                <Grid ColumnDefinitions="*, *, *, *, *, *, *">
                     <Label Grid.Column="0" Text="ID"/>
                     <Label Grid.Column="1" Grid.ColumnSpan="2" Text="Nome"/>
-                    <Label Grid.Column="3" Text="Sigla"/>
+                    <Label Grid.Column="3" Grid.ColumnSpan="2" Text="Sigla" HorizontalOptions="Start"/>
+                    <Label Grid.Column="5" Grid.ColumnSpan="2" Text="Observações"/>
                 </Grid>
             </ListView.Header>
 
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+
                         <ViewCell.ContextActions>
+
                             <MenuItem Text="Remover"
-                                Clicked="MenuItem_Clicked"/>
+                                      Clicked="MenuItem_Clicked"/>
+
+                            <MenuItem Text="Editar"    
+                                      Clicked="MenuItemEditar_Clicked"
+                                      IsDestructive="False"/>
+
                         </ViewCell.ContextActions>
 
-                        <Grid ColumnDefinitions="*, *, *, *">
-                            <Label Grid.Column="0" Text="{Binding Id}"/>
-                            <Label Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Nome}"/>
-                            <Label Grid.Column="3" Text="{Binding Sigla}"/>
+                        <Grid ColumnDefinitions="*, *, *, *, *, *, *">
+                            <Label Grid.Column="0" Text="{Binding Id}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                            <Label Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Nome}" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="TailTruncation"/>
+                            <Label Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding Sigla}" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="TailTruncation"/>
+                            <Label Grid.Column="5" Grid.ColumnSpan="2" Text="{Binding Observacao}" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="TailTruncation"/>
                         </Grid>
+
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
 
         </ListView>
 
-    </VerticalStackLayout>
+    </Grid>
 
 </ContentPage>

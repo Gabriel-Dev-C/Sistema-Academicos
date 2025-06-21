@@ -12,5 +12,8 @@ namespace SistemaAcademicos.Models
 
         [NotNull, MaxLength(10)]
         public string Sigla { get; set; }
+
+        [MaxLength(100)]
+        public string Observacao { get; set; }
     }
 }

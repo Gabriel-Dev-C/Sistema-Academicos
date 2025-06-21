@@ -9,14 +9,17 @@
     </ContentPage.ToolbarItems>
 
     <VerticalStackLayout
-    Spacing="10"
-    Padding="10">
+        Spacing="10"
+        Padding="10">
 
         <Label Text="Nome: "/>
         <Entry x:Name="txt_nome"/>
 
         <Label Text="Sigla: "/>
         <Entry x:Name="txt_sigla"/>
+
+        <Label Text="Observações: "/>
+        <Entry x:Name="txt_observacoes"/>
 
     </VerticalStackLayout>
 
