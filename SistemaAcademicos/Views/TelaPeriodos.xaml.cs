@@ -1,5 +1,4 @@
 using SistemaAcademicos.Models;
-using SistemaAcademicos.Views;
 using System.Collections.ObjectModel;
 
 namespace SistemaAcademicos.Views;

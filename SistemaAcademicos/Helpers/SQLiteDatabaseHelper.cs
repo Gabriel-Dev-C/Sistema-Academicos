@@ -11,6 +11,7 @@ namespace SistemaAcademicos.Helpers
             _conn = new SQLiteAsyncConnection(path);
             _conn.CreateTableAsync<Periodo>().Wait();
             _conn.CreateTableAsync<Disciplina>().Wait();
+            _conn.CreateTableAsync<Curso>().Wait();
         }
 
         public Task<int> Insert(Periodo p)
@@ -68,6 +69,35 @@ namespace SistemaAcademicos.Helpers
         public Task<int> DeleteDisciplina(int id)
         {
             return _conn.Table<Disciplina>().DeleteAsync(i => i.Id == id);
+        }
+
+        // Métodos para Curso
+
+        public Task<int> InsertCurso(Curso c)
+        {
+            return _conn.InsertAsync(c);
+        }
+
+        public Task<List<Curso>> UpdateCurso(Curso c)
+        {
+            string sql = "UPDATE Curso SET Nome=?, Sigla=?, Observacoes=?, PeriodoId=? WHERE Id=?";
+            return _conn.QueryAsync<Curso>(sql, c.Nome, c.Sigla, c.Observacoes, c.PeriodoId, c.Id);
+        }
+
+        public Task<List<Curso>> GetAllCursos()
+        {
+            return _conn.Table<Curso>().ToListAsync();
+        }
+
+        public Task<List<Curso>> SearchCurso(string nome)
+        {
+            string sql = "SELECT * FROM Curso WHERE Nome LIKE ?";
+            return _conn.QueryAsync<Curso>(sql, $"%{nome}%");
+        }
+
+        public Task<int> DeleteCurso(int id)
+        {
+            return _conn.Table<Curso>().DeleteAsync(i => i.Id == id);
         }
     }
 }
