@@ -12,6 +12,7 @@ namespace SistemaAcademicos.Helpers
             _conn.CreateTableAsync<Periodo>().Wait();
             _conn.CreateTableAsync<Disciplina>().Wait();
             _conn.CreateTableAsync<Curso>().Wait();
+            _conn.CreateTableAsync<Usuario>().Wait();
         }
 
         public Task<int> Insert(Periodo p)
@@ -98,6 +99,34 @@ namespace SistemaAcademicos.Helpers
         public Task<int> DeleteCurso(int id)
         {
             return _conn.Table<Curso>().DeleteAsync(i => i.Id == id);
+        }
+
+        // Métodos CRUD para Usuario
+        public Task<int> InsertUsuario(Usuario usuario)
+        {
+            return _conn.InsertAsync(usuario);
+        }
+
+        public Task<List<Usuario>> UpdateUsuario(Usuario usuario)
+        {
+            string sql = "UPDATE Usuario SET Nome=?, Senha=? WHERE Id=?";
+            return _conn.QueryAsync<Usuario>(sql, usuario.Nome, usuario.Senha, usuario.Id);
+        }
+
+        public Task<List<Usuario>> GetAllUsuarios()
+        {
+            return _conn.Table<Usuario>().ToListAsync();
+        }
+
+        public Task<List<Usuario>> SearchUsuario(string nome)
+        {
+            string sql = "SELECT * FROM Usuario WHERE Nome LIKE ?";
+            return _conn.QueryAsync<Usuario>(sql, $"%{nome}%");
+        }
+
+        public Task<int> DeleteUsuario(int id)
+        {
+            return _conn.Table<Usuario>().DeleteAsync(u => u.Id == id);
         }
     }
 }

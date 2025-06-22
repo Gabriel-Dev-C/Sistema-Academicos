@@ -4,81 +4,47 @@
              x:Class="SistemaAcademicos.Cadastro"
              Title="Cadastro de usuários">
 
-    <ScrollView>
-
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="20">
-
-            <Label
-        x:Name="lblNomeC"
-        Text="Nome Completo"/>
-
-            <Entry
-        x:Name="etrNomeC"
-        Placeholder="Digite aqui seu nome completo."
-        BackgroundColor="White"
-        TextColor="Black"/>
-
-            <Label
-        x:Name="lblNasc"
-        Text="Data de nascimento"/>
-
-            <DatePicker
-         x:Name="dpNasc"
-         Format="dd/MM/yyyy"
-         BackgroundColor="White"
-         TextColor="Black"/>
-
-            <Label
-        x:Name="lblEmail"
-        Text="Email"/>
-
-            <Entry
-        x:Name="etrEmail"
-        Placeholder="Digite aqui seu email acadêmico."
-        BackgroundColor="White"
-        TextColor="Black"/>
-
-            <Label
-        x:Name="lblCpf"
-        Text="CPF"/>
-
-            <Entry
-        x:Name="etrCpf"
-        Placeholder="Digite aqui seu CPf."
-        BackgroundColor="White"
-        TextColor="Black"
-        Keyboard="Telephone"
-        MaxLength="11"/>
-
-            <Label
-        x:Name="lblTel"
-        Text="Número de Telefone"/>
-
-            <Entry
-        x:Name="etrTel"
-        Placeholder="(XX) XXXXX-XXXX"
-        BackgroundColor="White"
-        TextColor="Black"
-        Keyboard="Telephone"
-        MaxLength="11"/>
-
-            <Button
-        x:Name="btnCadastrar"
-        Text="Cadastrar"
-        FontSize="Medium"
-        BackgroundColor="LightGray"/>
-
-            <Button
-        x:Name="btnVoltar"
-        Text="Voltar"
-        Clicked="Voltar"
-        FontSize="Medium"
-        BackgroundColor="LightGray"/>
-
-        </VerticalStackLayout>
-
-    </ScrollView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
+    <Grid Padding="30,0" RowDefinitions="Auto,*">
+        <SearchBar x:Name="txtsearch"
+               Placeholder="Buscar usuário por nome"
+               TextChanged="txtsearch_TextChanged"
+               Grid.Row="0"
+               Margin="0,0,0,20"/>
+        
+        <ListView x:Name="lstusuarios" Grid.Row="1">
+            
+            <ListView.Header>
+                <Grid ColumnDefinitions="0.7*,2*,2*">
+                    <Label Grid.Column="0" Text="ID" HorizontalOptions="Center"/>
+                    <Label Grid.Column="1" Text="Nome" HorizontalOptions="Center"/>
+                    <Label Grid.Column="2" Text="Senha" HorizontalOptions="Center"/>
+                </Grid>
+            </ListView.Header>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Remover" Clicked="MenuItem_Clicked"/>
+                            <MenuItem Text="Editar" Clicked="MenuItemEditar_Clicked" IsDestructive="False"/>
+                        </ViewCell.ContextActions>
+                        
+                        <Grid ColumnDefinitions="0.7*,2*,2*">
+                            <Label Grid.Column="0" Text="{Binding Id}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding Nome}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Grid.Column="2" Text="{Binding Senha}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        </Grid>
+                        
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+        </ListView>
+    </Grid>
 
 </ContentPage>
