@@ -20,7 +20,7 @@
             <Entry x:Name="txtSigla" Text="{Binding Sigla}" TextColor="White"/>
 
             <Label x:Name="lblObservacoes" Text="Observações:"/>
-            <Entry x:Name="txtObservacoes" Text="{Binding Observacoes}" TextColor="White"/>
+            <Entry x:Name="txtObservacoes" Text="{Binding Observacao}" TextColor="White"/>
 
             <Button x:Name="btnLimpar" Text="Limpar" Clicked="btnLimpar_Clicked"/>
             <Button x:Name="btnAlterar" Text="Alterar" Clicked="btnAlterar_Clicked"/>
