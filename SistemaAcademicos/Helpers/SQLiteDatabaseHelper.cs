@@ -13,6 +13,10 @@ namespace SistemaAcademicos.Helpers
             _conn.CreateTableAsync<Disciplina>().Wait();
             _conn.CreateTableAsync<Curso>().Wait();
             _conn.CreateTableAsync<Usuario>().Wait();
+
+            _conn.ExecuteAsync("ALTER TABLE Usuario ADD COLUMN Ra TEXT").ContinueWith(t => { });
+            _conn.ExecuteAsync("ALTER TABLE Usuario ADD COLUMN Email TEXT").ContinueWith(t => { });
+            _conn.ExecuteAsync("ALTER TABLE Usuario ADD COLUMN Mensalidade REAL").ContinueWith(t => { });
         }
 
         public Task<int> Insert(Periodo p)
@@ -109,8 +113,8 @@ namespace SistemaAcademicos.Helpers
 
         public Task<List<Usuario>> UpdateUsuario(Usuario usuario)
         {
-            string sql = "UPDATE Usuario SET Nome=?, Senha=? WHERE Id=?";
-            return _conn.QueryAsync<Usuario>(sql, usuario.Nome, usuario.Senha, usuario.Id);
+            string sql = "UPDATE Usuario SET Ra=?, Nome=?, Senha=?, Email=?, Mensalidade=? WHERE Id=?";
+            return _conn.QueryAsync<Usuario>(sql, usuario.Ra, usuario.Nome, usuario.Senha, usuario.Email, usuario.Mensalidade, usuario.Id);
         }
 
         public Task<List<Usuario>> GetAllUsuarios()
@@ -118,10 +122,10 @@ namespace SistemaAcademicos.Helpers
             return _conn.Table<Usuario>().ToListAsync();
         }
 
-        public Task<List<Usuario>> SearchUsuario(string nome)
+        public Task<List<Usuario>> SearchUsuario(string ra)
         {
-            string sql = "SELECT * FROM Usuario WHERE Nome LIKE ?";
-            return _conn.QueryAsync<Usuario>(sql, $"%{nome}%");
+            string sql = "SELECT * FROM Usuario WHERE Ra LIKE ?";
+            return _conn.QueryAsync<Usuario>(sql, $"%{ra}%");
         }
 
         public Task<int> DeleteUsuario(int id)

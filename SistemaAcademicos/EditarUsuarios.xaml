@@ -13,11 +13,20 @@
             <Label x:Name="lblCodigo" Text="Código:"/>
             <Entry x:Name="txtCodigo" Text="{Binding Id}" IsReadOnly="True" TextColor="White"/>
 
-            <Label x:Name="lblNome" Text="Nome:"/>
+            <Label Text="RA:"/>
+            <Entry x:Name="txtRa" Text="{Binding Ra}" TextColor="White"/>
+
+            <Label Text="Nome:"/>
             <Entry x:Name="txtNome" Text="{Binding Nome}" TextColor="White"/>
 
-            <Label x:Name="lblSenha" Text="Senha:"/>
+            <Label Text="Senha:"/>
             <Entry x:Name="txtSenha" Text="{Binding Senha}" TextColor="White"/>
+
+            <Label Text="Email:"/>
+            <Entry x:Name="txtEmail" Text="{Binding Email}" TextColor="White"/>
+
+            <Label Text="Mensalidade:"/>
+            <Entry x:Name="txtMensalidade" Text="{Binding Mensalidade}" TextColor="White" Keyboard="Numeric"/>
 
             <Button x:Name="btnLimpar" Text="Limpar" Clicked="btnLimpar_Clicked"/>
             <Button x:Name="btnAlterar" Text="Alterar" Clicked="btnAlterar_Clicked"/>

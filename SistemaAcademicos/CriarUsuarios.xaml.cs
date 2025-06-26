@@ -15,8 +15,11 @@ public partial class CriarUsuarios : ContentPage
         {
             Usuario p = new Usuario
             {
+                Ra = etrRa.Text,
                 Nome = etrNomeC.Text,
-                Senha = etrSenha.Text
+                Senha = etrSenha.Text,
+                Email = etrEmail.Text,
+                Mensalidade = decimal.TryParse(etrMensalidade.Text, out var mensalidade) ? mensalidade : 0
             };
             await App.Db.InsertUsuario(p);
             await DisplayAlert("Sucesso!", "Registro inserido", "OK");

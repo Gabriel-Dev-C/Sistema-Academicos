@@ -12,11 +12,20 @@
     Spacing="10"
     Padding="10">
 
-        <Label Text="Nome: "/>
+        <Label Text="RA:"/>
+        <Entry x:Name="etrRa"/>
+
+        <Label Text="Nome:"/>
         <Entry x:Name="etrNomeC"/>
 
-        <Label Text="Senha: "/>
-        <Entry x:Name="etrSenha"/>
+        <Label Text="Senha:"/>
+        <Entry x:Name="etrSenha" IsPassword="True"/>
+
+        <Label Text="Email:"/>
+        <Entry x:Name="etrEmail" Keyboard="Email"/>
+
+        <Label Text="Mensalidade:"/>
+        <Entry x:Name="etrMensalidade" Keyboard="Numeric"/>
 
     </VerticalStackLayout>
 

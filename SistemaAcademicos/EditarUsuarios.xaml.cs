@@ -13,15 +13,21 @@ namespace SistemaAcademicos
             if (BindingContext is Usuario usuario)
             {
                 txtCodigo.Text = usuario.Id.ToString();
+                txtRa.Text = usuario.Ra;
                 txtNome.Text = usuario.Nome;
                 txtSenha.Text = usuario.Senha;
+                txtEmail.Text = usuario.Email;
+                txtMensalidade.Text = usuario.Mensalidade.ToString("F2");
             }
         }
 
         private void btnLimpar_Clicked(object sender, EventArgs e)
         {
+            txtRa.Text = string.Empty;
             txtNome.Text = string.Empty;
             txtSenha.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtMensalidade.Text = string.Empty;
         }
 
         private async void btnAlterar_Clicked(object sender, EventArgs e)
@@ -29,7 +35,14 @@ namespace SistemaAcademicos
             if (BindingContext is not Usuario usuario)
                 return;
 
-            if (string.IsNullOrWhiteSpace(usuario.Nome) || string.IsNullOrWhiteSpace(usuario.Senha))
+            // Atualiza os dados do usuário com os valores das Entry
+            usuario.Ra = txtRa.Text;
+            usuario.Nome = txtNome.Text;
+            usuario.Senha = txtSenha.Text;
+            usuario.Email = txtEmail.Text;
+            usuario.Mensalidade = decimal.TryParse(txtMensalidade.Text, out var mensalidade) ? mensalidade : 0;
+
+            if (string.IsNullOrWhiteSpace(usuario.Ra) || string.IsNullOrWhiteSpace(usuario.Nome) || string.IsNullOrWhiteSpace(usuario.Senha))
             {
                 await DisplayAlert("Atenção", "Preencha todos os campos.", "OK");
                 return;
