@@ -16,6 +16,9 @@ public partial class CriarCursos : ContentPage
         // Carrega os períodos do banco de dados
         var periodos = await App.Db.GetAll();
         picker_periodo.ItemsSource = periodos;
+
+        var disciplinas = await App.Db.GetAllDisciplinas();
+        picker_disciplina.ItemsSource = disciplinas;
     }
 
     private async void ToolbarItem_Clicked(object sender, EventArgs e)
@@ -23,9 +26,16 @@ public partial class CriarCursos : ContentPage
         try
         {
             var periodoSelecionado = picker_periodo.SelectedItem as Periodo;
+            var disciplinaSelecionada = picker_disciplina.SelectedItem as Disciplina;
+
             if (periodoSelecionado == null)
             {
                 await DisplayAlert("Atenção", "Selecione um período.", "OK");
+                return;
+            }
+            if (disciplinaSelecionada == null)
+            {
+                await DisplayAlert("Atenção", "Selecione uma disciplina.", "OK");
                 return;
             }
 
@@ -34,7 +44,8 @@ public partial class CriarCursos : ContentPage
                 Nome = txt_nome.Text,
                 Sigla = txt_sigla.Text,
                 Observacoes = txt_observacoes.Text,
-                PeriodoId = periodoSelecionado.Id
+                PeriodoId = periodoSelecionado.Id,
+                DisciplinaId = disciplinaSelecionada.Id
             };
             await App.Db.InsertCurso(p);
             await DisplayAlert("Sucesso!", "Registro inserido", "OK");

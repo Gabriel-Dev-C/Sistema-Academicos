@@ -22,11 +22,13 @@ public partial class TelaCursos : ContentPage
         // Busca todos os cursos e períodos
         List<Curso> tmp = await App.Db.GetAllCursos();
         var periodos = await App.Db.GetAll();
+        var disciplinas = await App.Db.GetAllDisciplinas();
 
         // Preenche a propriedade Periodo de cada curso
         foreach (Curso curso in tmp)
         {
             curso.Periodo = periodos.FirstOrDefault(p => p.Id == curso.PeriodoId);
+            curso.Disciplina = disciplinas.FirstOrDefault(d => d.Id == curso.DisciplinaId);
             lista.Add(curso);
         }
     }

@@ -15,7 +15,7 @@
             SemanticProperties.Description="Logo do Anchieta." />
 
             <Label
-            Text="SEJA BEM VINDO(A) À PÁGINA PRINCIPAL."
+            Text="SEJA BEM VINDO À PÁGINA PRINCIPAL."
             Style="{StaticResource Headline}"
             SemanticProperties.HeadingLevel="Level1" />
 

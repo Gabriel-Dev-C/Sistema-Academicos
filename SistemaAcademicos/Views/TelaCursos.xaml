@@ -20,12 +20,12 @@
                   Grid.Row="1">
             
             <ListView.Header>
-                <Grid ColumnDefinitions="0.7*,2*,1.2*,2.5*,1.5*">
+                <Grid ColumnDefinitions="0.7*,2*,1.2*,2*,2*">
                     <Label Grid.Column="0" Text="ID" HorizontalOptions="Center"/>
                     <Label Grid.Column="1" Text="Nome" HorizontalOptions="Center"/>
                     <Label Grid.Column="2" Text="Sigla" HorizontalOptions="Center"/>
-                    <Label Grid.Column="3" Text="Observações" HorizontalOptions="Center"/>
-                    <Label Grid.Column="4" Text="Período" HorizontalOptions="Center"/>
+                    <Label Grid.Column="3" Text="Período" HorizontalOptions="Center"/>
+                    <Label Grid.Column="4" Text="Disciplina" HorizontalOptions="Center"/>
                 </Grid>
             </ListView.Header>
 
@@ -44,12 +44,12 @@
 
                         </ViewCell.ContextActions>
 
-                        <Grid ColumnDefinitions="0.7*,2*,1.2*,2.5*,1.5*">
+                        <Grid ColumnDefinitions="0.7*,2*,1.2*,2*,2*">
                             <Label Grid.Column="0" Text="{Binding Id}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                            <Label Grid.Column="1" Text="{Binding Nome}" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="TailTruncation"/>
-                            <Label Grid.Column="2" Text="{Binding Sigla}" VerticalOptions="Center" HorizontalOptions="Center" LineBreakMode="TailTruncation"/>
-                            <Label Grid.Column="3" Text="{Binding Observacoes}" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="TailTruncation"/>
-                            <Label Grid.Column="4" Text="{Binding Periodo.Nome}" VerticalOptions="Center" HorizontalOptions="Center" LineBreakMode="TailTruncation"/>
+                            <Label Grid.Column="1" Text="{Binding Nome}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Grid.Column="2" Text="{Binding Sigla}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Grid.Column="3" Text="{Binding Periodo.Nome}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Grid.Column="4" Text="{Binding Disciplina.Nome}" VerticalOptions="Center" HorizontalOptions="Center"/>
                         </Grid>
 
                     </ViewCell>

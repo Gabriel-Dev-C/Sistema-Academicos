@@ -17,6 +17,8 @@ namespace SistemaAcademicos.Helpers
             _conn.ExecuteAsync("ALTER TABLE Usuario ADD COLUMN Ra TEXT").ContinueWith(t => { });
             _conn.ExecuteAsync("ALTER TABLE Usuario ADD COLUMN Email TEXT").ContinueWith(t => { });
             _conn.ExecuteAsync("ALTER TABLE Usuario ADD COLUMN Mensalidade REAL").ContinueWith(t => { });
+
+            _conn.ExecuteAsync("ALTER TABLE Curso ADD COLUMN DisciplinaId INTEGER").ContinueWith(t => { });
         }
 
         public Task<int> Insert(Periodo p)
@@ -85,8 +87,8 @@ namespace SistemaAcademicos.Helpers
 
         public Task<List<Curso>> UpdateCurso(Curso c)
         {
-            string sql = "UPDATE Curso SET Nome=?, Sigla=?, Observacoes=?, PeriodoId=? WHERE Id=?";
-            return _conn.QueryAsync<Curso>(sql, c.Nome, c.Sigla, c.Observacoes, c.PeriodoId, c.Id);
+            string sql = "UPDATE Curso SET Nome=?, Sigla=?, Observacoes=?, PeriodoId=?, DisciplinaId=? WHERE Id=?";
+            return _conn.QueryAsync<Curso>(sql, c.Nome, c.Sigla, c.Observacoes, c.PeriodoId, c.DisciplinaId, c.Id);
         }
 
         public Task<List<Curso>> GetAllCursos()

@@ -20,8 +20,15 @@ namespace SistemaAcademicos.Models
         [Indexed]
         public int PeriodoId { get; set; }
 
+        // Chave estrangeira para Disciplina
+        [Indexed]
+        public int DisciplinaId { get; set; }
+
         // Propriedade de navegação (não mapeada no banco)
         [Ignore]
         public Periodo Periodo { get; set; }
+
+        [Ignore]
+        public Disciplina Disciplina { get; set; }
     }
 }

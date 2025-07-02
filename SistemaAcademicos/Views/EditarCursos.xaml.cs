@@ -5,6 +5,7 @@ namespace SistemaAcademicos.Views
 	public partial class EditarCursos : ContentPage
 	{
         private List<Periodo> _periodos = new();
+        private List<Disciplina> _disciplinas = new();
 
         public EditarCursos()
         {
@@ -19,6 +20,9 @@ namespace SistemaAcademicos.Views
             _periodos = await App.Db.GetAll();
             pickerPeriodo.ItemsSource = _periodos;
 
+            _disciplinas = await App.Db.GetAllDisciplinas();
+            pickerDisciplina.ItemsSource = _disciplinas;
+
             // Preenche os campos se vier um Curso via BindingContext
             if (BindingContext is Curso curso)
             {
@@ -31,6 +35,10 @@ namespace SistemaAcademicos.Views
                 var periodoSelecionado = _periodos.FirstOrDefault(p => p.Id == curso.PeriodoId);
                 if (periodoSelecionado != null)
                     pickerPeriodo.SelectedItem = periodoSelecionado;
+
+                var disciplinaSelecionada = _disciplinas.FirstOrDefault(d => d.Id == curso.DisciplinaId);
+                if (disciplinaSelecionada != null)
+                    pickerDisciplina.SelectedItem = disciplinaSelecionada;
             }
         }
 
@@ -40,6 +48,7 @@ namespace SistemaAcademicos.Views
             txtSigla.Text = string.Empty;
             txtObservacoes.Text = string.Empty;
             pickerPeriodo.SelectedItem = null; // Limpa a seleção do Picker
+            pickerDisciplina.SelectedItem = null; // Limpa a seleção do Picker
         }
 
         private async void btnAlterar_Clicked(object sender, EventArgs e)
@@ -47,7 +56,7 @@ namespace SistemaAcademicos.Views
             if (BindingContext is not Curso curso)
                 return;
 
-            if (string.IsNullOrWhiteSpace(txtNome.Text) || string.IsNullOrWhiteSpace(txtSigla.Text) || pickerPeriodo.SelectedItem == null)
+            if (string.IsNullOrWhiteSpace(txtNome.Text) || string.IsNullOrWhiteSpace(txtSigla.Text) || pickerPeriodo.SelectedItem == null || pickerDisciplina.SelectedItem == null)
             {
                 await DisplayAlert("Atenção", "Preencha todos os campos.", "OK");
                 return;
@@ -64,6 +73,7 @@ namespace SistemaAcademicos.Views
                 curso.Sigla = txtSigla.Text;
                 curso.Observacoes = txtObservacoes.Text;
                 curso.PeriodoId = ((Periodo)pickerPeriodo.SelectedItem).Id;
+                curso.DisciplinaId = ((Disciplina)pickerDisciplina.SelectedItem).Id;
 
                 await App.Db.UpdateCurso(curso);
                 await DisplayAlert("Sucesso!", "Registro editado com sucesso.", "OK");

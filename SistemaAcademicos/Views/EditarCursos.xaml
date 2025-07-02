@@ -27,6 +27,11 @@
                     Title="Selecione um Período"
                     ItemDisplayBinding="{Binding Nome}"/>
 
+            <Label x:Name="lblDisciplina" Text="Disciplina:"/>
+            <Picker x:Name="pickerDisciplina"
+                    Title="Selecione uma Disciplina"
+                    ItemDisplayBinding="{Binding Nome}"/>
+
             <Button x:Name="btnLimpar" Text="Limpar" Clicked="btnLimpar_Clicked"/>
             <Button x:Name="btnAlterar" Text="Alterar" Clicked="btnAlterar_Clicked"/>
 

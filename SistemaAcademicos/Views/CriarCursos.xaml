@@ -25,6 +25,12 @@
         <Picker x:Name="picker_periodo"
                 Title="Selecione um Período"
                 ItemDisplayBinding="{Binding Nome}"/>
+
+        <Label Text="Disciplina: "/>
+        <Picker x:Name="picker_disciplina"
+                Title="Selecione uma Disciplina"
+                ItemDisplayBinding="{Binding Nome}"/>
+        
         <!-- Items will be added dynamically in code-behind -->
 
     </VerticalStackLayout>
