@@ -6,7 +6,7 @@ O foco do projeto é desenvolver um aplicativo que simule um sistema acadêmico,
 
 
 <p align="center">
-<img src="./Resources/Images/readme.jpg" alt="Protótipo do projeto.">
+<img src="SistemaAcademicos/Resources/Images/readme.jpg" alt="Protótipo do projeto.">
 </p>
 
 ## Meta
